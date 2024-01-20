@@ -1,0 +1,7 @@
+<h1><%= @championship.name %></h1>
+<% if user_signed_in? %>
+  <%= form_with(url: join_championship_path(@championship), method: :post) do |form| %>
+    <%= form.submit 'Unirse al Torneo', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+

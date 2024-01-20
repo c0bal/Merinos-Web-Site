@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+      <h1 class="text-center mb-4">Campeonatos</h1>
+
+      <% if notice.present? %>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <div id="championships">
+        <% @championships.each do |championship| %>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title"><%= link_to championship.name, championship %></h2>
+
+              <% championship.users.each do |user| %>
+                <p class="card-text"><strong>Username:</strong> <%= user.username %></p>
+              <% end %>
+
+              <% if user_signed_in? && !current_user.championships.include?(championship) %>
+                <%= link_to "Unirse al Torneo", join_championship_path(championship), method: :post, class: 'btn btn-primary' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+        <%= link_to "Nuevo Torneo", new_championship_path, class: 'btn btn-success' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

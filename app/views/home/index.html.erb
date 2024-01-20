@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto mt-5">
+      <h1 class="mb-4 text-center">Bienvenidos al Merino's Tour</h1>
+
+      <div class="card">
+        <%= image_tag "home/Couples2023-1.JPG", class: "card-img-top img-fluid", alt: "Couples 2023" %>
+        <div class="card-body">
+          <h5 class="card-title">Detalles del Evento</h5>
+          <ul class="list-unstyled">
+            <li>
+              <strong>Nombre:</strong>
+              3<span style="vertical-align: top; font-size: smaller;">era</span> Fecha Copa Couples
+            </li>
+            <li><strong>Fecha:</strong> 25 de febrero de 2024</li>
+            <li><strong>Lugar:</strong> Club de Golf Rocas de Santo Domingo</li>
+            <li><strong>Tarifa de Inscripción:</strong> $0</li>
+            <li><strong>Premios para los Ganadores</strong></li>
+          </ul>
+
+          <div class="text-center">
+            <%= image_tag "home/Copa.jpg", class: "img-fluid pequena", alt: "Couples 2023" %>
+
+            <% if !user_signed_in? %>
+              <a href="#" class="btn btn-primary">Regístrate Ahora</a>
+            <% else %>
+              <%= link_to 'Entrar', championships_path, class: 'btn btn-warning w-100' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <h2 class="text-center mb-3">Programa del Torneo</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Hora</th>
+              <th scope="col">Evento</th>
+              <th scope="col">Lugar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>25 de febrero de 2024</td>
+              <td>3:00 PM</td>
+              <td>Torneo Principal</td>
+              <td>Putting Green</td>
+            </tr>
+            <tr>
+              <td>25 de febrero de 2024</td>
+              <td>6:00 PM - 8:00 PM</td>
+              <td>Premiación y Comida</td>
+              <td>Quincho Piscina</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

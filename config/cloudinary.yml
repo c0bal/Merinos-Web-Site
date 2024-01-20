@@ -1,0 +1,21 @@
+development:
+  cloud_name: dvjiyjwym
+  api_key: 173837123518331
+  api_secret: l7Bt1p0_hthYhjntxpLPXBqJGqc
+  enhance_image_tag: true
+  static_file_support: false
+  root: MerinoTour
+production:
+  cloud_name: dvjiyjwym
+  api_key: 173837123518331
+  api_secret: l7Bt1p0_hthYhjntxpLPXBqJGqc
+  enhance_image_tag: true
+  static_file_support: true
+  root: MerinoTour
+test:
+  cloud_name: dvjiyjwym
+  api_key: 173837123518331
+  api_secret: l7Bt1p0_hthYhjntxpLPXBqJGqc
+  enhance_image_tag: true
+  static_file_support: false
+  root: MerinoTour

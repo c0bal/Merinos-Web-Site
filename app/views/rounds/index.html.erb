@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Rounds</h1>
+
+<div id="rounds">
+  <% @rounds.each do |round| %>
+    <%= render round %>
+    <p>
+      <%= link_to "Show this round", round %>
+    </p>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <% if current_user.image.present? %>
+    <%= image_tag current_user.image.url %>
+  <% else %>
+    <p>No image attached.</p>
+  <% end %>
+<% end %>
+
+<%= link_to "New round", new_round_path %>

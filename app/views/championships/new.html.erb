@@ -1,0 +1,10 @@
+<!-- app/views/championships/new.html.erb -->
+
+<h1>Create a New Championship</h1>
+
+<%= form_with(model: @championship, url: championships_path, method: :post) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  
+  <%= form.submit 'Create Championship' %>
+<% end %>
