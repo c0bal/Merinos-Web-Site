@@ -5,6 +5,8 @@
 <%= form_with(model: @championship, url: championships_path, method: :post) do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
-  
+ 
+  <%= form.hidden_field :estado, value: 'preparacion' %>
+ 
   <%= form.submit 'Create Championship' %>
 <% end %>

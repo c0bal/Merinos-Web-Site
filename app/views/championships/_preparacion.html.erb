@@ -1,0 +1,81 @@
+<%= stylesheet_link_tag 'championprep', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="golf-tournament d-flex align-items-center justify-content-center">
+  <div class="text-center team-container">
+    <h2 class="tournament-heading mb-4 team-table-title">Leaderboard</h2>
+
+    <div class="team-table-container">
+      <table class="table table-bordered golf-table text-center team-table">
+        <thead>
+          <tr>
+            <th class="team-table-header">Posición</th>
+            <th class="team-table-header">Equipo</th>
+            <th class="team-table-header">Integrantes</th>
+            <th class="team-table-header">Acciones</th>
+            <th class="team-table-header">Live Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @championship_teams.each.with_index(1) do |team, index| %>
+            <% user_belongs_to_team = current_user.teams.exists?(id: team.id, championship_id: @championship.id) %>
+            <tr>
+              <td class="align-middle team-position circle-badge"><%= index %></td>
+              <td class="align-middle team-name"><%= team.name %></td>
+              <td class="align-middle team-members">
+                <% team.users.each do |user| %>
+                  <span class="d-block member-name"><%= user.name %></span>
+                <% end %>
+              </td>
+              <td class="align-middle team-actions">
+                <% if user_belongs_to_team %>
+                  <% if team.round.present? %> 
+                  <% else %>
+                    <%= form_with(url: leave_team_path(team, championship_id: @championship.id), method: :delete, local: true, class: 'mb-0') do |form| %>  
+                      <%= form.submit 'Leave Team', class: 'btn btn-danger btn-sm' %>
+                    <% end %>
+                  <% end %>
+                  <% if team.users.count >= 2 %>
+                    <% if team.round.present? %> 
+                      <%= link_to 'Ver Ronda', team.round, class: 'btn btn-info btn-sm mt-2' %>
+                    <% else %>
+                      <%= button_to 'Iniciar Ronda', start_round_team_path(team.id), method: :post, class: 'btn btn-primary btn-sm mt-2' %>
+                    <% end %>
+                  <% end %>
+                <% elsif current_user.teams.empty? && team.users.count < 2 %>
+                  <%= form_with(url: join_team_path(team, championship_id: @championship.id), method: :post, local: true, class: 'mb-0') do |form| %>  
+                    <%= form.submit 'Unirse al Equipo', class: 'btn btn-success btn-sm' %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td class="align-middle team-score"><%= team.round.total_score %></td> 
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if current_user.teams.empty? %>
+      <div class="team-form-container">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="card shadow-lg">
+                <div class="card-body">
+                  <h2 class="card-title text-center mb-4">Crear Equipo</h2>
+                  <%= form_with(model: Team.new, url: teams_path, method: :post, data: { turbo_frame: 'team-list' }, local: true) do |form| %>
+                    <div class="form-group">
+                      <%= form.label :name, 'Nombre del equipo:', class: 'form-label text-muted' %>
+                      <%= form.text_field :name, class: 'form-control', placeholder: 'Ingrese el nombre del equipo' %>
+                      <%= form.hidden_field :championship_id, value: @championship.id %>
+                    </div>
+                    <%= form.submit 'Crear y Unirse al Equipo', class: 'btn btn-sm btn-success btn-block' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

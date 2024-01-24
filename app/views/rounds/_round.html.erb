@@ -1,12 +1,10 @@
-<div id="<%= dom_id round %>">
-  <p>
-    <strong>Score:</strong>
-    <%= round.score %>
-  </p>
-
-  <p>
-    <strong>Date:</strong>
-    <%= round.date %>
-  </p>
-
+<div class="card mt-3">
+  <div class="card-header">
+    <h3>Round Information</h3>
+  </div>
+  <div class="card-body">
+    <p><strong>Fecha:</strong> <%= round.date.strftime('%B %d, %Y') %></p>
+    <p><strong>Score Total:</strong> <%= round.total_score %></p>
+    <p><strong>Hoyos Jugados:</strong> <%= round.num_holes %></p>
+  </div>
 </div>

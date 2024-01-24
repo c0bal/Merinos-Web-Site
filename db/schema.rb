@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_18_234548) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_23_181240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_234548) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "estado"
   end
 
   create_table "championships_users", id: false, force: :cascade do |t|
@@ -27,17 +28,30 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_234548) do
     t.index ["user_id"], name: "index_championships_users_on_user_id"
   end
 
+  create_table "holes", force: :cascade do |t|
+    t.bigint "round_id", null: false
+    t.integer "number"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["round_id"], name: "index_holes_on_round_id"
+  end
+
   create_table "rounds", force: :cascade do |t|
     t.integer "score"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "team_id", null: false
+    t.index ["team_id"], name: "index_rounds_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "championship_id", null: false
+    t.index ["championship_id"], name: "index_teams_on_championship_id"
   end
 
   create_table "teams_users", id: false, force: :cascade do |t|
@@ -63,4 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_234548) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "holes", "rounds"
+  add_foreign_key "rounds", "teams"
+  add_foreign_key "teams", "championships"
 end

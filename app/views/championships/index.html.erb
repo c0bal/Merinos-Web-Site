@@ -2,25 +2,34 @@
   <div class="row mt-4">
     <div class="col-md-8 mx-auto">
       <h1 class="text-center mb-4">Campeonatos</h1>
-
-      <% if notice.present? %>
-        <div class="alert alert-success" role="alert">
-          <%= notice %>
-        </div>
-      <% end %>
-
       <div id="championships">
         <% @championships.each do |championship| %>
-          <div class="card mb-4">
+          <div class="card shadow mb-4">
+            <div class="card-header bg-info text-white">
+              <h2 class="card-title h4 mb-0"><%= championship.name %></h2>
+            </div>
             <div class="card-body">
-              <h2 class="card-title"><%= link_to championship.name, championship %></h2>
-
-              <% championship.users.each do |user| %>
-                <p class="card-text"><strong>Username:</strong> <%= user.username %></p>
-              <% end %>
-
-              <% if user_signed_in? && !current_user.championships.include?(championship) %>
-                <%= link_to "Unirse al Torneo", join_championship_path(championship), method: :post, class: 'btn btn-primary' %>
+              <div class="integrantes">
+                <p class="mb-2"><strong>Integrantes:</strong></p>
+                <% if championship.users.present? %>
+                  <p class="card-text mb-1">
+                    <%= championship.users.map(&:username).join(', ') %>
+                  </p>
+                <% else %>
+                  <p class="card-text mb-1">Sin integrantes</p>
+                <% end %>
+              </div>
+                <div class="estado">
+                  <p class="mb-2"><strong>Estado del torneo:</strong> <%= championship.estado %></p>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+              <% if user_signed_in? %>
+                <% if current_user.championships.include?(championship) %>
+                  <%= link_to "Ver Torneo", championship, class: 'btn btn-success btn-sm' %>
+                <% else %>
+                  <%= button_to "Unirse al Torneo", join_championship_path(championship), method: :post, class: 'btn btn-primary btn-sm', remote: true %>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -30,7 +39,6 @@
       <% if user_signed_in? %>
         <%= link_to "Nuevo Torneo", new_championship_path, class: 'btn btn-success' %>
       <% end %>
-
     </div>
   </div>
 </div>

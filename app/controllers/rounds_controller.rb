@@ -8,6 +8,8 @@ class RoundsController < ApplicationController
 
   # GET /rounds/1 or /rounds/1.json
   def show
+    @round = Round.find(params[:id])
+    @holes = @round.holes
   end
 
   # GET /rounds/new
@@ -38,6 +40,9 @@ class RoundsController < ApplicationController
   def update
     respond_to do |format|
       if @round.update(round_params)
+        # Explicitly save holes to ensure they are updated in the same request
+        @round.holes.each(&:save)
+        
         format.html { redirect_to round_url(@round), notice: "Round was successfully updated." }
         format.json { render :show, status: :ok, location: @round }
       else
@@ -63,8 +68,7 @@ class RoundsController < ApplicationController
       @round = Round.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def round_params
-      params.require(:round).permit(:score, :date)
+      params.require(:round).permit(:score, :date, :team_id, holes_attributes: [:id, :number, :score, :_destroy])
     end
 end

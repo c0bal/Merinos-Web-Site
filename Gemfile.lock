@@ -93,6 +93,7 @@ GEM
     cloudinary (1.28.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
+    cocoon (1.2.15)
     concurrent-ruby (1.2.3)
     crass (1.0.6)
     date (3.3.4)
@@ -263,6 +264,7 @@ DEPENDENCIES
   capybara
   carrierwave
   cloudinary
+  cocoon
   debug
   devise
   importmap-rails

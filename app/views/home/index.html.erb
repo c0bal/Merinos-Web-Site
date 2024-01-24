@@ -17,12 +17,13 @@
             <li><strong>Tarifa de Inscripción:</strong> $0</li>
             <li><strong>Premios para los Ganadores</strong></li>
           </ul>
-
           <div class="text-center">
             <%= image_tag "home/Copa.jpg", class: "img-fluid pequena", alt: "Couples 2023" %>
+          </div>
+          <div class="text-center">
 
             <% if !user_signed_in? %>
-              <a href="#" class="btn btn-primary">Regístrate Ahora</a>
+              <%= link_to 'Registrarse', new_user_registration_path, class: 'btn btn-primary m-1 rounded' %>
             <% else %>
               <%= link_to 'Entrar', championships_path, class: 'btn btn-warning w-100' %>
             <% end %>

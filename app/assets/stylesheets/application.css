@@ -1,36 +1,75 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+/* Reset CSS */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-main {
-    flex: 1;
+/* Navbar Styles */
+.navbar {
+  background-color: #f8f9fa; /* Light background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle box shadow for a luxury touch */
 }
 
-  /* Adjust as needed for your footer */
-.footer {
-    background-color: #f8f9fa;
-    padding: 20px;
+.navbar-brand.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #343a40; /* Dark text color */
 }
 
-.pequena {
-    max-width: 400px; 
-    height: auto;
-    margin-bottom: 10px;
-  }
+.navbar-toggler.bars {
+  font-size: 1.5rem;
+  color: #343a40; /* Dark color for the bars icon */
+}
+
+.navbar-nav {
+  margin-right: -16px; /* Adjust spacing to align items properly */
+}
+
+.nav-item {
+  margin: 0.5rem;
+}
+
+.nav-link {
+  color: #343a40; /* Dark color for links */
+}
+
+.nav-link:hover {
+  color: #0056b3; /* Hover color for links */
+}
+
+.btn-light {
+  background-color: #f8f9fa; /* Light background for buttons */
+  color: #343a40; /* Dark text color for buttons */
+  border: 1px solid #dee2e6; /* Border color for buttons */
+}
+
+.btn-light:hover {
+  background-color: #e2e6ea; /* Darker background on hover for buttons */
+}
+
+.dropdown-menu {
+  background-color: #f8f9fa; /* Light background for dropdown menu */
+  border: 1px solid #dee2e6; /* Border color for dropdown menu */
+}
+
+.dropdown-item {
+  color: #343a40; /* Dark color for dropdown items */
+}
+
+.dropdown-item:hover {
+  background-color: #e2e6ea; /* Darker background on hover for dropdown items */
+  color: #0056b3; /* Hover color for dropdown items */
+}
+
+.btn-outline-primary {
+  color: #007bff; /* Primary color for outlined button */
+  border-color: #007bff; /* Border color for outlined button */
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff; /* Background color on hover for outlined button */
+  color: #fff; /* Text color on hover for outlined button */
+}

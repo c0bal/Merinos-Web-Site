@@ -1,0 +1,5 @@
+// app/views/holes/create.js.erb
+
+var form = $("<%= j(render('form', hole: @hole)) %>");
+$('#holes-container').append(form);
+$('#new-hole-form').hide(); // Hide the new hole form after creating a new hole

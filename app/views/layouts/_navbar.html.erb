@@ -1,31 +1,38 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <%= link_to "Home", root_path, class: "navbar-brand" %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container">
+    <%= link_to "Home", root_path, class: "navbar-brand logo" %>
+    <button class="navbar-toggler bars" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto" id="navbarItems">
-      <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="btn btn-light m-1 shadow dropdown-toggle w-100" href="#" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-edit"></i> Mi Perfil
-          </a>
-          <div class="dropdown-menu" aria-labelledby="userDropdown">
-            <%= link_to edit_user_registration_path, class: "dropdown-item m-1" do %>
-              Editar Perfil
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <ul class="navbar-nav text-center nav-links ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to championships_path, class: 'nav-link btn btn-light m-1 rounded' do %>
+              Campeonatos
             <% end %>
-            <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "dropdown-item btn btn-danger rounded m-1 active" %>
-          </div>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-success m-1 rounded-0' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Sign-up', new_user_registration_path, class: 'btn btn-success m-1 rounded-0' %>
-        </li>
-      <% end %>
-    </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link btn btn-light m-1 shadow dropdown-toggle" href="#" role="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user-edit"></i> Mi Perfil
+            </a>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+              <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+                Editar Perfil
+              <% end %>
+              <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class: "dropdown-item btn btn-danger rounded active" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Iniciar Sesión', new_user_session_path, class: 'nav-link btn btn-outline-primary m-1 rounded' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Registrarse', new_user_registration_path, class: 'nav-link btn btn-primary m-1 rounded' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>

@@ -1,7 +1,11 @@
-<h1><%= @championship.name %></h1>
-<% if user_signed_in? %>
-  <%= form_with(url: join_championship_path(@championship), method: :post) do |form| %>
-    <%= form.submit 'Unirse al Torneo', class: 'btn btn-primary' %>
-  <% end %>
+<!-- show.html.erb -->
+<% case @championship.estado %>
+<% when 'preparacion' %>
+  <%= render 'preparacion' %>
+<% when 'en_progreso' %>
+  <%= render 'en_progreso' %>
+<% when 'finalizado' %>
+  <%= render 'finalizado' %>
+<% else %>
+  <p>Estado desconocido</p>
 <% end %>
-
